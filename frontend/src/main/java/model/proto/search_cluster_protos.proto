@@ -1,0 +1,26 @@
+syntax = "proto2";
+
+// Proto package (Different to java package) to avoid collision
+package distributed.search;
+
+//Java Package Name
+option java_package = "model.proto";
+
+// Java class that contains all the below defined messages
+option java_outer_classname = "SearchModel";
+
+//Request from front end to search coordinator
+message Request{
+  required string search_query = 1;
+}
+
+//Response from search coordinator to fronted
+message Response {
+  repeated DocumentStats relevant_documents = 1;
+
+  message DocumentStats {
+    required string document_name = 1;
+    optional double score = 2;
+    optional int64 document_size = 3 ;
+  }
+}
